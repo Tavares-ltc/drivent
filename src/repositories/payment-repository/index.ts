@@ -6,8 +6,20 @@ async function findPaymentByTicketId(ticketId: number) {
   });
 }
 
+async function processPayment(ticketId: number, value: number, cardIssuer: string, cardLastDigits: string) {
+  return prisma.payment.create({
+    data: {
+      ticketId,
+      value,
+      cardIssuer,
+      cardLastDigits
+    }
+  });
+}
+
 const paymentRepository = {
-  findPaymentByTicketId
+  findPaymentByTicketId,
+  processPayment
 };
 
 export default paymentRepository;
